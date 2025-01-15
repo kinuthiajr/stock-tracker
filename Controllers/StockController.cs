@@ -4,6 +4,7 @@ using api.Dtos.StockDTOs;
 using api.Interfaces;
 using api.Mappers;
 using api.Models.Data;
+using api.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,12 +18,12 @@ namespace api.Controllers
         private readonly IStockRepository _stockRepo = stockRepo;
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var stocks = await _stockRepo.GetAllAsync();
+            var stocks = await _stockRepo.GetAllAsync(query);
             var Stockdto = stocks.Select(s => s.ToStockDto()); // Select is a mapper that returns a dto object of stock class
             return Ok(stocks);
         }
@@ -78,7 +79,7 @@ namespace api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-                
+
             var stockmodel = await _stockRepo.DeleteAsync(id);
 
             if(stockmodel == null)
