@@ -1,5 +1,6 @@
 using System;
 using api.Dtos;
+using api.Dtos.CommentDTOs;
 using api.Dtos.StockDTOs;
 using api.Models;
 
@@ -10,16 +11,16 @@ namespace api.Mappers
         public static Stockdto ToStockDto(this Stock stockModel)
         {
             return new Stockdto
-            {
-                Id = stockModel.Id,
-                Symbol = stockModel.Symbol,
-                CompanyName = stockModel.CompanyName,
-                Purchase = stockModel.Purchase,
-                LastDiv = stockModel.LastDiv,
-                Industry = stockModel.Industry,
-                MarketCap = stockModel.MarketCap,
-                Comments = stockModel.Comments.Select(c => c.ToCommentDto()).ToList()
-            };
+                {
+                    Id = stockModel.Id,
+                    Symbol = stockModel.Symbol,
+                    CompanyName = stockModel.CompanyName,
+                    Purchase = stockModel.Purchase,
+                    LastDiv = stockModel.LastDiv,
+                    Industry = stockModel.Industry,
+                    MarketCap = stockModel.MarketCap,
+                    Comments = stockModel.Comments?.Select(c => c.ToCommentDto()).ToList() ?? new List<Commentdto>()
+                };
         }  
 
         public static Stock ToStockFromCreateDto(this CreateStockRequestdto Stockdto)
