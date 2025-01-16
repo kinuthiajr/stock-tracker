@@ -22,6 +22,7 @@ namespace api.Repository
         public async Task<Stock?> DeleteAsync(int id)
         {
             var stockModel = await _context.Stock.FirstOrDefaultAsync(x => x.Id == id);
+            
             if(stockModel == null)
             {
                 return null;
@@ -50,11 +51,14 @@ namespace api.Repository
             {
                 if(query.SortBy.Equals("Symbol",StringComparison.OrdinalIgnoreCase))
                 {   
-                    allStocks = (bool)query.IsDecsending ? allStocks.OrderByDescending(sym => sym.Symbol) : allStocks.OrderBy(sym => sym.Symbol);
+                    allStocks = (bool)query.IsDecsending ? allStocks.OrderByDescending(sym => sym.Symbol) 
+                    : allStocks.OrderBy(sym => sym.Symbol);
                 }
             }
 
-            return await allStocks.ToListAsync();
+            var SkipNum = (query.PageNumber -1) * (query.PageSize);
+
+            return await allStocks.Skip(SkipNum).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
