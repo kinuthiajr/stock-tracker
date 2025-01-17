@@ -25,6 +25,8 @@ builder.Services.AddDbContext<ApplicationDbContext> (options => {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 }); // Added this after making the Data folder so as to connect with sqlite
 
+
+// -----------JWT and Users
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
