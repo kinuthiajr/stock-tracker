@@ -12,10 +12,24 @@ namespace api.Models.Data
     {
         public required DbSet<Stock> Stock { get; set; }
         public required DbSet<Comment> Comments { get; set; }
+        public required DbSet<Portfolio> Portfolios {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<Portfolio>(x => x.HasKey(p => new {p.AppUserId, p.StockId}));
+
+            // Relational Many-to-many User can have many stocks
+            builder.Entity<Portfolio>()
+            .HasOne(u => u.AppUser)
+            .WithMany(u => u.Portfolios)
+            .HasForeignKey(p => p.AppUserId);
+
+            // Relational Many-to-many a Stock can belong to many Users 
+            builder.Entity<Portfolio>()
+            .HasOne(u => u.Stock)
+            .WithMany(u => u.Portfolios)
+            .HasForeignKey(p => p.StockId);
 
             List<IdentityRole> roles = new List<IdentityRole>
             {
