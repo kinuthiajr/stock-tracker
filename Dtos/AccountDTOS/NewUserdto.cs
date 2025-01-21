@@ -7,8 +7,8 @@ namespace api.Dtos.AccountDTOS
 {
     public class NewUserdto
     {
-        public string Name {get; set;}
-        public string Email {get; set;}
-        public string Token {get; set;}
+        public required string Name {get; set;}
+        public required string Email {get; set;}
+        public required string Token {get; set;}
     }
 }

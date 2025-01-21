@@ -5,6 +5,7 @@ using api.Interfaces;
 using api.Mappers;
 using api.Models.Data;
 using api.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ namespace api.Controllers
         private readonly IStockRepository _stockRepo = stockRepo;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)
