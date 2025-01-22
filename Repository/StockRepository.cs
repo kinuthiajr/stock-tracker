@@ -56,7 +56,7 @@ namespace api.Repository
                 }
             }
 
-            var SkipNum = (query.PageNumber -1) * (query.PageSize);
+            var SkipNum = (query.PageNumber -1) * query.PageSize;
 
             return await allStocks.Skip(SkipNum).Take(query.PageSize).ToListAsync();
         }
@@ -65,6 +65,11 @@ namespace api.Repository
         {
             return await _context.Stock.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
         }
+
+        public async Task<Stock?> GetBySymbolAsync(string symbol)
+        {
+            return await _context.Stock.FirstOrDefaultAsync(s => s.Symbol == symbol);
+        }    
 
         public async Task<bool> StockExists(int id)
         {

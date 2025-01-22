@@ -62,6 +62,8 @@ builder.Services.AddAuthentication(options => {
 builder.Services.AddScoped<IStockRepository, StockRepository>(); // Registered this Interface&Repo
 builder.Services.AddScoped<ICommentRepository, CommentRepository>(); // Registered this Interface&Repo
 builder.Services.AddScoped<ITokenService, TokenService>(); // Regitered this to generate tokens and claims
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+
 
 var app = builder.Build();
 
