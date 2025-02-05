@@ -11,16 +11,16 @@ namespace api.Mappers
         public static Stockdto ToStockDto(this Stock stockModel)
         {
             return new Stockdto
-                {
-                    Id = stockModel.Id,
-                    Symbol = stockModel.Symbol,
-                    CompanyName = stockModel.CompanyName,
-                    Purchase = stockModel.Purchase,
-                    LastDiv = stockModel.LastDiv,
-                    Industry = stockModel.Industry,
-                    MarketCap = stockModel.MarketCap,
-                    Comments = stockModel.Comments?.Select(c => c.ToCommentDto()).ToList() ?? new List<Commentdto>()
-                };
+            {
+                Id = stockModel.Id,
+                Symbol = stockModel.Symbol,
+                CompanyName = stockModel.CompanyName,
+                Purchase = stockModel.Purchase,
+                LastDiv = stockModel.LastDiv,
+                Industry = stockModel.Industry,
+                MarketCap = stockModel.MarketCap,
+                Comments = stockModel.Comments?.Select(c => c.ToCommentDto()).ToList() ?? new List<Commentdto>()
+            };
         }  
 
         public static Stock ToStockFromCreateDto(this CreateStockRequestdto Stockdto)
