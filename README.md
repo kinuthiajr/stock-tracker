@@ -14,7 +14,7 @@ Built using the Repository Pattern, this API promotes a clean separation of conc
 - **Clean Architecture**: Follows the principles of clean architecture, promoting modularity and maintainability.
 - **SOLID Principles**: Adheres to SOLID principles to ensure code quality and maintainability. 
 
-# Examples 
+#### Examples 
 - Single Responsibility Principle (SRP): Each class (e.g., controllers, repositories, DTOs) seems to have a single responsibility. For instance, the PortfolioController manages portfolio-related actions, while the StockRepository handles data access for stocks.
 - Liskov Substitution Principle (LSP): If interfaces are used correctly (e.g., IStockRepository, ICommentRepository), derived classes can be substituted without affecting the correctness of the program.
 - Interface Segregation Principle (ISP): The use of specific interfaces for repositories suggests adherence to ISP, as clients are not forced to depend on methods they do not use.
